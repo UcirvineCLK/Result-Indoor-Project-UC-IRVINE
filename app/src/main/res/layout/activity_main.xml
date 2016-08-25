@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.indoor.ucirvine.indoor_system_result.MainActivity">
+
+    <TableLayout
+        android:layout_marginTop="80dp"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:stretchColumns="*"
+        android:layout_gravity="center">
+
+        <View
+            android:layout_height="1dp"
+            android:layout_width="match_parent"/>
+        <TableRow
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent">
+            <TextView
+                android:layout_height="45dp"
+                android:layout_width="wrap_content"
+                android:layout_marginBottom="1dp"
+                android:layout_marginLeft="1dp"
+                android:background="@color/tableBackground"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="    "/>
+            <TextView
+                android:layout_height="45dp"
+
+                android:layout_width="wrap_content"
+                android:layout_marginBottom="1dp"
+                android:layout_marginLeft="1dp"
+                android:background="@color/tableBackground"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="RSSI"/>
+            <TextView
+                android:layout_height="45dp"
+
+                android:layout_width="wrap_content"
+                android:layout_marginBottom="1dp"
+                android:layout_marginLeft="1dp"
+                android:background="@color/tableBackground"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="DISTANCE"/>
+        </TableRow>
+        <View
+            android:layout_height="1dp"
+            android:layout_width="match_parent"/>
+        <TableRow
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent">
+            <TextView
+                android:layout_height="45dp"
+                android:layout_width="wrap_content"
+                android:layout_marginBottom="1dp"
+                android:layout_marginLeft="1dp"
+                android:background="@color/tableBackground"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="Device 1"/>
+            <TextView
+                android:id="@+id/device1"
+
+                android:layout_height="45dp"
+                android:layout_width="wrap_content"
+                android:layout_marginBottom="1dp"
+                android:layout_marginLeft="1dp"
+                android:background="@color/tableBackground"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="RANK"/>
+            <TextView
+                android:id="@+id/device1_distance"
+
+                android:layout_height="45dp"
+                android:layout_width="wrap_content"
+                android:layout_marginBottom="1dp"
+                android:layout_marginLeft="1dp"
+                android:background="@color/tableBackground"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="RANK"/>
+        </TableRow>
+        <View
+            android:layout_height="1dp"
+            android:layout_width="match_parent"/>
+        <TableRow
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent">
+            <TextView
+                android:layout_height="45dp"
+                android:layout_width="wrap_content"
+                android:layout_marginBottom="1dp"
+                android:layout_marginLeft="1dp"
+                android:background="@color/tableBackground"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="Device 2"/>
+            <TextView
+                android:id="@+id/device2"
+
+                android:layout_height="45dp"
+                android:layout_width="wrap_content"
+                android:layout_marginBottom="1dp"
+                android:layout_marginLeft="1dp"
+                android:background="@color/tableBackground"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="RANK"/>
+            <TextView
+                android:id="@+id/device2_distance"
+                android:layout_height="45dp"
+                android:layout_width="wrap_content"
+                android:layout_marginBottom="1dp"
+                android:layout_marginLeft="1dp"
+                android:background="@color/tableBackground"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="RANK"/>
+        </TableRow>
+
+    </TableLayout>
+
+    <ProgressBar
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:id="@+id/progressBar"
+        style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:indeterminate="true"
+        android:max="100"/>
+
+        <TextView
+            android:id="@+id/tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-condensed"
+            android:textColor="#676a6b"
+            />
+        <!-- Default color/drawable progress bar -->
+        <ProgressBar
+            android:id="@+id/pb_default"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            style="@android:style/Widget.Holo.ProgressBar.Horizontal"
+            android:layout_below="@id/tv"
+            android:layout_marginBottom="15dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Progress bar default drawable"
+            android:textSize="10dp"
+            android:layout_alignBottom="@id/pb_default"
+            android:paddingLeft="10dp"
+            />
+        <!--
+            android:progressDrawable
+                Drawable used for the progress mode.
+
+                Must be a reference to another resource, in the form "@[+][package:]type:name"
+                or to a theme attribute in the form "?[package:][type:]name".
+
+                This corresponds to the global attribute resource symbol progressDrawable.
+        -->
+        <!-- Progress bar custom drawable by XML -->
+        <ProgressBar
+            android:id="@+id/pb_drawable"
+            android:layout_width="225dp"
+            android:layout_height="wrap_content"
+            style="@android:style/Widget.Holo.ProgressBar.Horizontal"
+            android:progressDrawable="@drawable/progress"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Progress bar custom drawable"
+            android:fontFamily="sans-serif-thin"
+            android:textSize="10dp"
+            android:paddingLeft="10dp"
+            />
+
+</LinearLayout>
+
