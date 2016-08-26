@@ -164,26 +164,48 @@
 
     </TableLayout>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <ProgressBar
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-
             android:id="@+id/pb_default"
-            android:layout_width="200dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@android:style/Widget.Holo.ProgressBar.Horizontal"
-            android:layout_marginBottom="15dp"
             />
 
         <TextView
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/pb_default"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0"
             android:textSize="10dp"
-            android:layout_alignBottom="@id/pb_default"
             android:paddingLeft="10dp"
             />
 
+        <TextView
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/pb_default"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textSize="10dp"
+            android:paddingLeft="10dp"
+            />
+
+        <TextView
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/pb_default"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textSize="10dp"
+            android:paddingLeft="10dp"
+            />
+    </RelativeLayout>
 </LinearLayout>
 
