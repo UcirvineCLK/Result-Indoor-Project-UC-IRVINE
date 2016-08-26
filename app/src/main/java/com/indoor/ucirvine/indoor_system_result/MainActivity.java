@@ -47,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
     //play music in background
     private Handler mHandlerToMusic;
     private Runnable mRunableToMusic;
+    private Runnable mRunableToMusic2;
+    private Runnable mRunableToMusic3;
 
 
     int avg1[] = new int[8];
@@ -69,7 +71,14 @@ public class MainActivity extends AppCompatActivity {
     boolean full3 = false;
     boolean full4 = false;
 
-    Uri myUri = Uri.parse("file:///sdcard/Download/Hi.mp3"); // initialize Uri here
+
+    boolean music1 = false;
+    boolean music2 = false;
+    boolean music3 = false;
+
+    Uri myUri = Uri.parse("file:///sdcard/Download/1.mp3"); // initialize Uri here
+    Uri myUri2 = Uri.parse("file:///sdcard/Download/2.mp3"); // initialize Uri here
+    Uri myUri3 = Uri.parse("file:///sdcard/Download/3.mp3"); // initialize Uri here
 
     //TODO predict value
     double predict_x = 0;
@@ -104,13 +113,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         pb_default = (ProgressBar) findViewById(R.id.pb_default);
-        pb_drawable = (ProgressBar) findViewById(R.id.pb_drawable);
 
         device1 = (TextView)findViewById(R.id.device1);
         device2 = (TextView)findViewById(R.id.device2);
+        device3 = (TextView)findViewById(R.id.device3);
 
         device1_distance = (TextView)findViewById(R.id.device1_distance);
         device2_distance = (TextView)findViewById(R.id.device2_distance);
+        device3_distance = (TextView)findViewById(R.id.device3_distance);
 
         adapter = new Adapter_Rssi();
 //        listview = (ListView) findViewById(R.id.item_list);
@@ -156,8 +166,9 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 MediaPlayer mediaPlayer = new MediaPlayer();
                 mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+
                 try {
-                    mediaPlayer.setDataSource(getApplicationContext(), myUri);
+                     mediaPlayer.setDataSource(getApplicationContext(), myUri);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -170,11 +181,51 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
+        mRunableToMusic2 = new Runnable() {
+            @Override
+            public void run() {
+                MediaPlayer mediaPlayer = new MediaPlayer();
+                mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+
+                try {
+                    mediaPlayer.setDataSource(getApplicationContext(), myUri2);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    mediaPlayer.prepare();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                mediaPlayer.start();
+            }
+        };
+
+        mRunableToMusic3 = new Runnable() {
+            @Override
+            public void run() {
+                MediaPlayer mediaPlayer = new MediaPlayer();
+                mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+
+                try {
+                    mediaPlayer.setDataSource(getApplicationContext(), myUri3);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    mediaPlayer.prepare();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                mediaPlayer.start();
+            }
+        };
+
+
         mHandlerToRestart = new Handler();
         mHandlerToRestart.postDelayed(mRunableToRestart, 3000);
 
         mHandlerToMusic = new Handler();
-//        mHandlerToMusic.post(mRunableToMusic);
 
         progressStatus = 0;
 
@@ -278,7 +329,6 @@ public class MainActivity extends AppCompatActivity {
                                         Log.e("dd","dd");
                                         device1.setText("" + result3);
                                         device1_distance.setText(" dis "+ d3);
-                                        pb_default.setProgress((int) (d3*100));
 
                                     }
                                     adapter.notifyDataSetChanged();
@@ -287,9 +337,7 @@ public class MainActivity extends AppCompatActivity {
                                 //device 4
                                 if (device.getAddress().equals("B8:27:EB:3A:91:F4")) {
 
-
                                     double a = -22.94102589, b = -24.71862505 , y = rssi - (-25.1366666667) ;
-
 
                                     avg4[size4++] = rssi;
 
@@ -328,8 +376,74 @@ public class MainActivity extends AppCompatActivity {
                                     predict_p = (1 - update_g) * predict_p;
 
                                     adapter.addItem("yyg", "result", "" + ts, "" + rssi, d2 + " " + d3 + " " + distance + " " + predict_x);
-                                    device2_distance.setText(" "+ distance);
-                                    device3_distance.setText(" "+ predict_x);
+                                    device3.setText(""+ distance);
+
+                                    if(0 < distance && distance < 1 && !music1){
+                                        music1 = true;
+                                        music2 = false;
+                                        music3 = false;
+
+
+                                        MediaPlayer mediaPlayer = new MediaPlayer();
+                                        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+
+                                        try {
+                                            mediaPlayer.setDataSource(getApplicationContext(), myUri);
+                                        } catch (IOException e) {
+                                            e.printStackTrace();
+                                        }
+                                        try {
+                                            mediaPlayer.prepare();
+                                        } catch (IOException e) {
+                                            e.printStackTrace();
+                                        }
+                                        mediaPlayer.start();
+
+                                    }
+                                    else if(1 < distance && distance < 2 && !music2){
+                                        music1 = false;
+                                        music2 = true;
+                                        music3 = false;
+                                        MediaPlayer mediaPlayer = new MediaPlayer();
+                                        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+
+                                        try {
+                                            mediaPlayer.setDataSource(getApplicationContext(), myUri2);
+                                        } catch (IOException e) {
+                                            e.printStackTrace();
+                                        }
+                                        try {
+                                            mediaPlayer.prepare();
+                                        } catch (IOException e) {
+                                            e.printStackTrace();
+                                        }
+                                        mediaPlayer.start();
+
+                                    }
+                                    else if(2 < distance && distance <3 && !music3){
+                                        music1 = false;
+                                        music2 = false;
+                                        music3 = true;
+                                        MediaPlayer mediaPlayer = new MediaPlayer();
+                                        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+
+                                        try {
+                                            mediaPlayer.setDataSource(getApplicationContext(), myUri2);
+                                        } catch (IOException e) {
+                                            e.printStackTrace();
+                                        }
+                                        try {
+                                            mediaPlayer.prepare();
+                                        } catch (IOException e) {
+                                            e.printStackTrace();
+                                        }
+                                        mediaPlayer.start();
+
+                                    }
+
+                                    device3_distance.setText(""+ predict_x);
+
+                                    pb_default.setProgress((int) (distance*100));
 
                                     adapter.notifyDataSetChanged();
 
@@ -339,5 +453,4 @@ public class MainActivity extends AppCompatActivity {
                     });
                 }
             };
-
 }
